@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kalkulator Sederhana</title>
+</head>
+<body>
+    <h1>Kalkulator Sederhana</h1>
+    <div>
+        <input type="text" id="operand1" oninput="calculateResult()">
+        <button onclick="setOperator('+')">+</button>
+        <button onclick="setOperator('-')">-</button>
+        <button onclick="setOperator('*')">*</button>
+        <button onclick="setOperator('/')">/</button>
+        <input type="text" id="operand2" oninput="calculateResult()">
+    </div>
+    <div>
+        <input type="text" id="result" disabled>
+    </div>
+    <script>
+        let operator = '+';
+
+        function setOperator(newOperator) {
+            operator = newOperator;
+            calculateResult();
+        }
+
+        function calculateResult() {
+            const operand1 = parseFloat(document.getElementById('operand1').value);
+            const operand2 = parseFloat(document.getElementById('operand2').value);
+            const resultField = document.getElementById('result');
+
+            if (!isNaN(operand1) && !isNaN(operand2)) {
+                switch (operator) {
+                    case '+':
+                        resultField.value = operand1 + operand2;
+                        break;
+                    case '-':
+                        resultField.value = operand1 - operand2;
+                        break;
+                    case '*':
+                        resultField.value = operand1 * operand2;
+                        break;
+                    case '/':
+                        if (operand2 !== 0) {
+                            resultField.value = operand1 / operand2;
+                        } else {
+                            resultField.value = 'Error: Division by zero';
+                        }
+                        break;
+                    default:
+                        resultField.value = 'Invalid operator';
+                        break;
+                }
+            } else {
+                resultField.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
